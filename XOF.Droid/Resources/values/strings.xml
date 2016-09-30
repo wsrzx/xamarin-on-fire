@@ -11,9 +11,11 @@
   <string name="error_incorrect_password">This password is incorrect</string>
   <string name="error_field_required">This field is required</string>
   <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
-  <string name="auth_failed">Usuario não autorizado verifique email e senha</string>
+  <string name="auth_failed">Usuario não autorizado verifique email e senha!</string>
   <string name="loading">Conectando</string>
   <string name="auth_success">Cadastro efetuado com sucesso!</string>
   <string name="enviar">Enviar</string>
   <string name="escreva_mensagem">Escreva sua mensagem</string>
+  <string name="register_success">Cadastro efetuado com sucesso!</string>
+  <string name="register_fail">Ops! Encontramos um problema ao criar a sua conta, tente novamente mais tarde!</string>
 </resources>

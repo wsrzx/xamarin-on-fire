@@ -2581,6 +2581,12 @@ namespace XOF.Droid
 			// aapt resource value: 0x7f070019
 			public const int prompt_password = 2131165209;
 			
+			// aapt resource value: 0x7f070028
+			public const int register_fail = 2131165224;
+			
+			// aapt resource value: 0x7f070027
+			public const int register_success = 2131165223;
+			
 			// aapt resource value: 0x7f070013
 			public const int status_bar_notification_info_overflow = 2131165203;
 			
