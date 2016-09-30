@@ -17,12 +17,12 @@ namespace XOF.Droid.Constants
     /// </summary>
     public class AppSettings
     {
-        public static readonly string ApiKey = "<firebase_api_key>";
-        public static readonly string AuthDomain = "<firebase_auth_domain>.firebaseapp.com";
-        public static readonly string DbUrl = "https://<firebase_db>.firebaseio.com";
-        public static readonly string StorageBucket = "<storage_bucket>.appspot.com";
-        public static readonly string MessageSenderId = "<message_sender_id>";
-        public static readonly string ProjectId = "<project_id>";
-        public static readonly string FirebaseSecret = "<firebase_secret>";
+        public static readonly string ApiKey = "AIzaSyBq6svCUe_fs0WnhfrzYwKBYW1bVjbyUqo";
+        public static readonly string AuthDomain = "xamarinappsonfire.firebaseapp.com";
+        public static readonly string DbUrl = "https://xamarinappsonfire.firebaseio.com";
+        public static readonly string StorageBucket = "xamarinappsonfire.appspot.com";
+        public static readonly string MessageSenderId = "200208017126";
+        public static readonly string ProjectId = "xamarinappsonfire";
+        public static readonly string FirebaseSecret = "wVXPj2OOldm3oav1HHLwM03guXSh5lRYW92duh8V";
     }
 }

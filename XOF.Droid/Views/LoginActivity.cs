@@ -12,35 +12,35 @@ namespace XOF.Droid.Views
         private Button _loginButton, _registerButton;
         private EditText _passwordEditText, _emailEditText;
 
-        protected override async void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             // Set our view from the "main" layout resource
-            SetContentView (Resource.Layout.ActivityLogin);
+            SetContentView(Resource.Layout.ActivityLogin);
 
             _loginButton = FindViewById<Button>(Resource.Id.email_sign_in_button);
             _registerButton = FindViewById<Button>(Resource.Id.register);
             _passwordEditText = FindViewById<EditText>(Resource.Id.password);
             _emailEditText = FindViewById<EditText>(Resource.Id.email);
 
-            _loginButton.Click += async (sender, args)  =>
+            _loginButton.Click += async (sender, args) =>
             {
-                var user = FirebaseService.Instance.CurrentUser;
-                await FirebaseService.Instance.LoginAsync(_emailEditText.Text, _passwordEditText.Text);
+                await _firebaseService.LoginAsync(_emailEditText.Text, _passwordEditText.Text);
 
-                if (user != null)
+                if (_firebaseService.CurrentUser != null)
+                {
                     StartActivity(typeof(ChatActivity));
+                }
                 else
                     ShowToast(GetString(Resource.String.auth_failed));
             };
 
             _registerButton.Click += async (sender, args) =>
             {
-                await FirebaseService.Instance.CreateUserAsync(_emailEditText.Text, _passwordEditText.Text);
-                var user = FirebaseService.Instance.CurrentUser;
+                await _firebaseService.CreateUserAsync(_emailEditText.Text, _passwordEditText.Text);
 
-                if (user != null)
+                if (_firebaseService.CurrentUser != null)
                 {
                     ShowToast(GetString(Resource.String.register_success));
                     StartActivity(typeof(ChatActivity));
