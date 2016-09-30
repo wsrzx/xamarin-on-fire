@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Firebase.Xamarin.Auth;
 using Firebase.Xamarin.Database;
+using Firebase.Xamarin.Database.Query;
 using Firebase.Xamarin.Database.Streaming;
 using XOF.Droid.Constants;
 using XOF.Droid.Models;
@@ -20,19 +21,32 @@ namespace XOF.Droid.Services
 {
     public class FirebaseService
     {
-        private static FirebaseService _instance = null;
-
-        public static FirebaseService Instance => _instance ?? new FirebaseService();
+        public static FirebaseService Instance { get; } = new FirebaseService();
 
         private FirebaseConfig FirebaseConfig => new FirebaseConfig(AppSettings.ApiKey);
         private FirebaseClient FirebaseDbCliente => new FirebaseClient(AppSettings.DbUrl);
 
-        public User CurrentUser { get; set; } = null;
+        private User _currentUser = null;
+
+        public User CurrentUser { get { return _currentUser; } }
+        protected AppPreferences AppPreferences => new AppPreferences(Android.App.Application.Context);
+
 
         public async Task CreateUserAsync(string email, string pwd)
         {
-            var firebaseAuthProvider = new FirebaseAuthProvider(FirebaseConfig);
-            var firebaseAuthLink = await firebaseAuthProvider.CreateUserWithEmailAndPasswordAsync(email, pwd);
+            try
+            {
+
+                var firebaseAuthProvider = new FirebaseAuthProvider(FirebaseConfig);
+                var firebaseAuthLink = await firebaseAuthProvider.CreateUserWithEmailAndPasswordAsync(email, pwd);
+                _currentUser = firebaseAuthLink.User;
+
+                SaveToken(firebaseAuthLink.FirebaseToken);
+            }
+            catch
+            {
+                // ignored
+            }
         }
 
         public async Task LoginAsync(string email, string pwd)
@@ -41,7 +55,9 @@ namespace XOF.Droid.Services
             {
                 var firebaseAuthProvider = new FirebaseAuthProvider(FirebaseConfig);
                 var firebaseAuthLink = await firebaseAuthProvider.SignInWithEmailAndPasswordAsync(email, pwd);
-                CurrentUser = firebaseAuthLink.User;
+                _currentUser = firebaseAuthLink.User;
+
+                SaveToken(firebaseAuthLink.FirebaseToken);
             }
             catch
             {
@@ -51,12 +67,26 @@ namespace XOF.Droid.Services
 
         public async Task PostAsync(ChatMessage message)
         {
+            var token = AppPreferences.GetAccessKey();
+
             var item = await FirebaseDbCliente
-                  .Child("chatMessage")
-                  //.WithAuth("<Authentication Token>") // <-- Add Auth token if required. Auth instructions further down in readme.
+                  .Child("chat")
                   .PostAsync(message);
         }
 
-      
+        public void SaveToken(string firebaseToken)
+        {
+            AppPreferences.SaveAccessKey(firebaseToken);
+        }
+
+        public void QueryAsync()
+        {
+            //var items = await FirebaseDbCliente
+            //  .Child("chat")
+            //  .OrderByKey()
+            //  .OnceAsync<ChatMessage>();
+
+            //return items;
+        }
     }
 }
