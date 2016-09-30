@@ -13,6 +13,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/lstChat"
+    android:stackFromBottom="true"
+    android:transcriptMode="alwaysScroll"
     android:layout_gravity="center_horizontal"
     android:layout_weight="10" />
   <LinearLayout

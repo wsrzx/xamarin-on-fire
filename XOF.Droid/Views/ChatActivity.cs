@@ -13,7 +13,7 @@ namespace XOF.Droid.Views
         private Button _butEnviar;
         private EditText _edtMensagem;
         private ListView _lstChat;
-        protected override void OnCreate(Bundle bundle)
+        protected override async void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
@@ -24,6 +24,10 @@ namespace XOF.Droid.Views
             _edtMensagem = FindViewById<EditText>(Resource.Id.edtMensagem);
             _lstChat = FindViewById<ListView>(Resource.Id.lstChat);
 
+            var messages = await _firebaseService.QueryAsync();
+            var adapter = new MessageAdapter(this, messages);
+            _lstChat.Adapter = adapter;
+            
             _butEnviar.Click += async (sender, e) =>
             {
                 var userName = _firebaseService.CurrentUser.Email;
@@ -36,6 +40,11 @@ namespace XOF.Droid.Views
                 await _firebaseService.PostAsync(message);
 
                 _edtMensagem.Text = string.Empty;
+                adapter.Messages = await _firebaseService.QueryAsync();
+                adapter.NotifyDataSetChanged();
+
+                _lstChat.SmoothScrollToPosition(adapter.Count);
+
             };
         }
     }
