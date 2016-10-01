@@ -15,8 +15,6 @@ namespace XOF.Droid.Views.Base
 {
     public class BaseActivity : Activity
     {
-
-
         protected readonly FirebaseService _firebaseService = FirebaseService.Instance;
 
         protected void ShowToast(string message)

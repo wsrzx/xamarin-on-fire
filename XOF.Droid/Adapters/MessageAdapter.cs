@@ -13,6 +13,14 @@ namespace XOF.Droid
         private ObservableCollection<ChatMessage> _messages;
         private Activity _activity;
 
+        public ObservableCollection<ChatMessage> Messages
+        {
+            get
+            {
+                return _messages;
+            }
+            set { _messages = value; }
+        }
 
         public MessageAdapter(Activity activity, ObservableCollection<ChatMessage> messages)
         {

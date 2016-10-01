@@ -24,6 +24,11 @@ namespace XOF.Droid.Views
             _passwordEditText = FindViewById<EditText>(Resource.Id.password);
             _emailEditText = FindViewById<EditText>(Resource.Id.email);
 
+#if DEBUG
+            _passwordEditText.Text = "123Aa321";
+            _emailEditText.Text = "williamsrz@outlook.com";
+#endif
+
             _loginButton.Click += async (sender, args) =>
             {
                 await _firebaseService.LoginAsync(_emailEditText.Text, _passwordEditText.Text);

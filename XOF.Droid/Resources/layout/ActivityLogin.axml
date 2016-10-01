@@ -12,7 +12,12 @@
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
+      <RelativeLayout
+         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+      <LinearLayout
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,5 +65,6 @@
                     android:text="@string/action_register" 
                     android:textStyle="bold"/>
         </LinearLayout>
-    </ScrollView>
+    </RelativeLayout>
+        </ScrollView>
 </RelativeLayout>
