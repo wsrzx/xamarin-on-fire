@@ -86,9 +86,7 @@ namespace XOF.Droid.Services
               .OrderByKey()
               .OnceAsync<ChatMessage>();
 
-            var messages = new ObservableCollection<ChatMessage>(items.Select(c => c.Object).ToList());
-
-            return messages;
+            return = new ObservableCollection<ChatMessage>(items.Select(c => c.Object).ToList());
         }
     }
 }
