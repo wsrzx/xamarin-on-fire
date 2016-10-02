@@ -67,8 +67,6 @@ namespace XOF.Droid.Services
 
         public async Task PostAsync(ChatMessage message)
         {
-            var token = AppPreferences.GetAccessKey();
-
             var item = await FirebaseDbCliente
                   .Child("chat")
                   .PostAsync(message);
@@ -86,7 +84,7 @@ namespace XOF.Droid.Services
               .OrderByKey()
               .OnceAsync<ChatMessage>();
 
-            return = new ObservableCollection<ChatMessage>(items.Select(c => c.Object).ToList());
+            return new ObservableCollection<ChatMessage>(items.Select(c => c.Object).ToList());
         }
     }
 }
